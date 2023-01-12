@@ -3,6 +3,7 @@ Content-Type: text/html
 
 <html>
   <head>
+    <script src="https://unpkg.com/htmx.org"></script>
     <style>
       section {
         display: inline-block;
@@ -18,30 +19,14 @@ Content-Type: text/html
 
   <body>
     <section>
-      <p>Hello, {{name}}</p>
+      <p id="greet">Hi, please login first!</p>
 
-      <form method="POST" action="/logout">
-        <input type="submit" value="Logout" />
+      <form hx-boost="true">
+        <input type="text" name="name" />
+        <button hx-post="/login" hx-target="#greet">
+          Login
+        </button>
       </form>
-
-      <a href="javascript:void(0)">Blue theme</a>
     </section>
   </body>
-
-  <footer>
-    <script>
-      let themeElem = document.querySelector('a');
-      let nameElem  = document.querySelector('section > p');
-
-      themeElem.addEventListener('click', function(evt) {
-        if (nameElem.style.color == 'blue') {
-          nameElem.style.color = 'black';
-          themeElem.text = 'Blue theme';
-        } else {
-          nameElem.style.color = 'blue';
-          themeElem.text = 'Black theme';
-        }
-      })
-    </script>
-  </footer>
 </html>
